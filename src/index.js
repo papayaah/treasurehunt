@@ -30,11 +30,14 @@ const config = {
 const game = new Phaser.Game(config)
 var cursors
 var player
-
+var movingLeft = false
+var movingRight = false
+var worldLayer
 function preload() {
   this.load.image("logo", logoImg)
-
+  this.load.image("tiles", "src/assets/tileset.png")
   this.load.multiatlas('atlas', 'src/assets/atlas.json', 'src/assets')
+  this.load.tilemapTiledJSON("map", "src/assets/tilemap.json")
 }
 
 function create() {
@@ -49,13 +52,32 @@ function create() {
   //   loop: -1
   // })
 
-  player = this.add.sprite(40, 40, 'atlas', 'elf_m_hit_anim_f0.png')
+  const map = this.make.tilemap({ key: "map" })
+  // Phaser's cache (i.e. the name you used in preload)
+  const tileset = map.addTilesetImage('tileset', 'tiles')
+
+  // Parameters: layer name (or index) from Tiled, tileset, x, y
+  const belowLayer = map.createStaticLayer("Background", tileset, 0, 0)
+  worldLayer = map.createDynamicLayer("Blocks", tileset, 0, 0)
+
+  worldLayer.setCollisionByProperty({ collides: true })
+  const debugGraphics = this.add.graphics().setAlpha(0.75)
+  // worldLayer.renderDebug(debugGraphics, {
+  //   tileColor: null, // Color of non-colliding tiles
+  //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+  //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+  // })
+
+  player = this.physics.add.sprite(48, 48, 'atlas', 'elf_m_hit_anim_f0.png')
 
   createAnimation('f_idle', 'elf_f_idle_anim_f', 0, 3)
+  createAnimation('m_idle', 'elf_m_idle_anim_f', 0, 3)
   createAnimation('m_run', 'elf_m_run_anim_f', 0, 3)
   player.anims.play('m_run')
 
-  cursors = this.input.keyboard.createCursorKeys();
+  cursors = this.input.keyboard.createCursorKeys()
+
+  this.physics.add.collider(player, worldLayer)
 }
 
 function createAnimation(key, prefix, start, end) {
@@ -67,16 +89,49 @@ function createAnimation(key, prefix, start, end) {
 }
 
 function update() {
-  if (cursors.left.isDown)
-  {
-      player.x -= 10
-      player.flipX = true
-      player.anims.play('m_run', true);
+  if (cursors.left.isDown) {
+    if(!movingLeft) {
+      this.tweens.add({
+        targets: player,
+        x: '-= 16',
+        duration: 200,
+        onStart() {
+          movingLeft = true
+          player.flipX = true
+          player.anims.play('m_run', true)
+        },
+        onComplete() {
+          movingLeft = false
+          if(!cursors.left.isDown && !cursors.right.isDown)
+            player.anims.play('m_idle', true)
+        }
+      })
+    }
+  } else if (cursors.right.isDown) {
+    if(!movingRight) {
+      this.tweens.add({
+        targets: player,
+        x: '+=16',
+        duration: 200,
+        //paused: true,
+        onStart() {
+          movingRight = true
+          player.flipX = false
+          player.anims.play('m_run', true)
+        },
+        onComplete() {
+          movingRight = false
+          if(!cursors.left.isDown && !cursors.right.isDown)
+            player.anims.play('m_idle', true)
+        }
+      })
+    }
   }
-  else if (cursors.right.isDown)
-  {
-      player.x += 10
-      player.flipX = false
-      player.anims.play('m_run', true);
+
+  if(cursors.down.isDown) {
+    var tile = worldLayer.getTileAtWorldXY(player.x, player.y + 16)
+    if(tile) {
+      worldLayer.removeTileAt(tile.x, tile.y)
+    }
   }
 }

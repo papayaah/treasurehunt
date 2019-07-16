@@ -4,387 +4,387 @@
 			"image": "atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 54,
-				"h": 121
+				"w": 16,
+				"h": 504
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "elf_m_hit_anim_f0.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 4,
-						"w": 16,
-						"h": 21
-					},
-					"frame": {
-						"x": 1,
-						"y": 1,
-						"w": 16,
-						"h": 21
-					}
-				},
-				{
-					"filename": "elf_m_run_anim_f1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 6,
-						"w": 16,
-						"h": 21
-					},
-					"frame": {
-						"x": 19,
-						"y": 1,
-						"w": 16,
-						"h": 21
-					}
-				},
-				{
 					"filename": "elf_f_hit_anim_f0.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 6,
-						"w": 16,
-						"h": 20
-					},
-					"frame": {
-						"x": 37,
-						"y": 1,
-						"w": 16,
-						"h": 20
-					}
-				},
-				{
-					"filename": "elf_m_idle_anim_f0.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"y": 0,
 						"w": 16,
 						"h": 28
 					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 8,
-						"w": 16,
-						"h": 20
-					},
 					"frame": {
-						"x": 37,
-						"y": 23,
-						"w": 16,
-						"h": 20
-					}
-				},
-				{
-					"filename": "elf_m_run_anim_f0.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"x": 0,
+						"y": 0,
 						"w": 16,
 						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 8,
-						"w": 16,
-						"h": 20
-					},
-					"frame": {
-						"x": 1,
-						"y": 24,
-						"w": 16,
-						"h": 20
-					}
-				},
-				{
-					"filename": "elf_m_run_anim_f2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 8,
-						"w": 16,
-						"h": 20
-					},
-					"frame": {
-						"x": 19,
-						"y": 24,
-						"w": 16,
-						"h": 20
-					}
-				},
-				{
-					"filename": "elf_m_idle_anim_f1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 9,
-						"w": 16,
-						"h": 19
-					},
-					"frame": {
-						"x": 37,
-						"y": 45,
-						"w": 16,
-						"h": 19
-					}
-				},
-				{
-					"filename": "elf_m_idle_anim_f3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 9,
-						"w": 16,
-						"h": 19
-					},
-					"frame": {
-						"x": 1,
-						"y": 46,
-						"w": 16,
-						"h": 19
-					}
-				},
-				{
-					"filename": "elf_m_run_anim_f3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 9,
-						"w": 16,
-						"h": 19
-					},
-					"frame": {
-						"x": 19,
-						"y": 46,
-						"w": 16,
-						"h": 19
-					}
-				},
-				{
-					"filename": "elf_f_run_anim_f1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 10,
-						"w": 16,
-						"h": 18
-					},
-					"frame": {
-						"x": 37,
-						"y": 66,
-						"w": 16,
-						"h": 18
-					}
-				},
-				{
-					"filename": "elf_m_idle_anim_f2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 16,
-						"h": 28
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 10,
-						"w": 16,
-						"h": 18
-					},
-					"frame": {
-						"x": 1,
-						"y": 67,
-						"w": 16,
-						"h": 18
 					}
 				},
 				{
 					"filename": "elf_f_idle_anim_f0.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 11,
-						"w": 16,
-						"h": 17
-					},
-					"frame": {
-						"x": 19,
-						"y": 67,
-						"w": 16,
-						"h": 17
-					}
-				},
-				{
-					"filename": "elf_f_run_anim_f2.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"y": 0,
 						"w": 16,
 						"h": 28
 					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 11,
-						"w": 16,
-						"h": 17
-					},
 					"frame": {
-						"x": 19,
-						"y": 86,
+						"x": 0,
+						"y": 28,
 						"w": 16,
-						"h": 17
+						"h": 28
 					}
 				},
 				{
 					"filename": "elf_f_idle_anim_f1.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 12,
-						"w": 16,
-						"h": 16
-					},
-					"frame": {
-						"x": 1,
-						"y": 87,
-						"w": 16,
-						"h": 16
-					}
-				},
-				{
-					"filename": "elf_f_idle_anim_f3.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
+						"y": 0,
 						"w": 16,
 						"h": 28
 					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 12,
-						"w": 16,
-						"h": 16
-					},
 					"frame": {
-						"x": 37,
-						"y": 86,
+						"x": 0,
+						"y": 56,
 						"w": 16,
-						"h": 16
+						"h": 28
 					}
 				},
 				{
 					"filename": "elf_f_idle_anim_f2.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 13,
+						"y": 0,
 						"w": 16,
-						"h": 15
+						"h": 28
 					},
 					"frame": {
-						"x": 37,
-						"y": 104,
+						"x": 0,
+						"y": 84,
 						"w": 16,
-						"h": 15
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_f_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 112,
+						"w": 16,
+						"h": 28
 					}
 				},
 				{
 					"filename": "elf_f_run_anim_f0.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 13,
+						"y": 0,
 						"w": 16,
-						"h": 15
+						"h": 28
 					},
 					"frame": {
-						"x": 1,
-						"y": 105,
+						"x": 0,
+						"y": 140,
 						"w": 16,
-						"h": 15
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_f_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 168,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_f_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 196,
+						"w": 16,
+						"h": 28
 					}
 				},
 				{
 					"filename": "elf_f_run_anim_f3.png",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
 						"w": 16,
 						"h": 28
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 14,
+						"y": 0,
 						"w": 16,
-						"h": 14
+						"h": 28
 					},
 					"frame": {
-						"x": 19,
-						"y": 105,
+						"x": 0,
+						"y": 224,
 						"w": 16,
-						"h": 14
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_hit_anim_f0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 252,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_idle_anim_f0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 280,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_idle_anim_f1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 308,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_idle_anim_f2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 336,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_idle_anim_f3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 364,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_run_anim_f0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 392,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_run_anim_f1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 420,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_run_anim_f2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 448,
+						"w": 16,
+						"h": 28
+					}
+				},
+				{
+					"filename": "elf_m_run_anim_f3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 28
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 28
+					},
+					"frame": {
+						"x": 0,
+						"y": 476,
+						"w": 16,
+						"h": 28
 					}
 				}
 			]
@@ -393,6 +393,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:88c16c55be37a27872bb2e9b0ac6c74f:8969e40de9041877321b35469efc9ae4:cbce6b53f0f49e0bf15173c25c41f876$"
+		"smartupdate": "$TexturePacker:SmartUpdate:60cc4126a70a35f584c74a6830d8545e:8969e40de9041877321b35469efc9ae4:cbce6b53f0f49e0bf15173c25c41f876$"
 	}
 }
