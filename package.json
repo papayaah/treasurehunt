@@ -34,6 +34,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@heroiclabs/nakama-js": "^2.0.1",
+    "dat.gui": "^0.7.6",
     "phaser": "^3.16.2"
   }
 }
