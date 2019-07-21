@@ -1,9 +1,13 @@
 const nakama = require('@heroiclabs/nakama-js')
 import Session from './multiplayer/session'
+import Player from './player'
+import { Game } from 'phaser';
 
 const OP_CODES = {
   MOVE_LEFT: 1,
-  MOVE_RIGHT: 2
+  MOVE_RIGHT: 2,
+  PLAYERS: 3,
+  STATE: 4
 }
 
 export default class {
@@ -22,10 +26,10 @@ export default class {
     // console.log('initListeners', params, this.match.matchId, this.socket)
     if(params) this.match.matchId = params.match_id
     this.socket.onmatchdata = (result) => {
-      // console.log('opcode', result, this.players)
-      let content = result.data
+      console.log('opcode', result)
+      let data = result.data
       const player = this.players.getChildren().find(player => player.userId == result.data.userId)
-      console.log(player)
+      //console.log(player)
       switch (result.op_code) {
         case OP_CODES.MOVE_RIGHT:
           player.moveRight(this.cursors)
@@ -33,6 +37,15 @@ export default class {
         case OP_CODES.MOVE_LEFT:
           player.moveLeft(this.cursors)
         break;
+        case OP_CODES.STATE:
+          data.players.forEach(player => {
+            if(player.userId != this.session.userId) {
+              let other = new Player(game.scene.scenes[0], player.x, player.y, this)
+              other.userId = player.userId
+              this.players.add(other)
+            }
+          })
+          break;
         default: {
         }
       }
@@ -40,10 +53,22 @@ export default class {
   }
 
   playerMoveLeft(userId) {
-    this.match.send(OP_CODES.MOVE_LEFT, userId)
+    this.match.send(OP_CODES.MOVE_LEFT, { userId: userId })
   }
 
   playerMoveRight(userId) {
-    this.match.send(OP_CODES.MOVE_RIGHT, userId)
+    this.match.send(OP_CODES.MOVE_RIGHT, { userId: userId })
+  }
+
+  sendState() {
+    let data = { players: [] }
+    this.players.children.each(player => {
+      data.players.push({
+        userId: player.userId,
+        x: player.x,
+        y: player.y
+      })
+    })
+    this.match.send(OP_CODES.STATE, data)
   }
 }

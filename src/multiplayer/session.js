@@ -13,6 +13,8 @@ export default class {
     let sessionHandler = (session) => {
       // console.info("session connected id:", session.user_id, "username:", session.username);
       // console.info("Session expired?", session.isexpired(Date.now() / 1000));
+      this.userId = session.user_id
+      this.username = session.username
       let verbose = false
       let useSSL = false
       this.socket = client.createSocket(useSSL, verbose)

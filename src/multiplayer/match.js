@@ -178,9 +178,9 @@ export default class {
         })
   }
 
-  send(opCode, userId) {
-    console.log(this.matchId, opCode, userId)
-    this.socket.send({ match_data_send: { match_id: this.matchId, op_code: opCode, data: { userId: userId } } })
+  send(opCode, data) {
+    console.log('match.js send', this.matchId, opCode, data)
+    this.socket.send({ match_data_send: { match_id: this.matchId, op_code: opCode, data: data } })
       .then(() => {
         // console.log("Successfully sent data message.")
       }).catch(error => {
