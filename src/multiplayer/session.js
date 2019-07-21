@@ -22,10 +22,12 @@ export default class {
         this.match.findExistingMatch(existingMatchId => {
           if(!existingMatchId) {
             this.match.createMatch(match => {
+              this.matchId = match.match_id
               game.emitter.emit('createMatch', match)
             })
           } else {
             this.match.joinMatch(existingMatchId, match => {
+              console.log('session.js joinMatch', match)
               this.matchId = match.match_id
               if(existingMatchId == match.match_id) {
                 console.log('self.playerInMatch', self.playerInMatch(match))

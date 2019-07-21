@@ -176,7 +176,16 @@ export default class {
             })
           }
         })
+  }
 
+  send(opCode, userId) {
+    console.log(this.matchId, opCode, userId)
+    this.socket.send({ match_data_send: { match_id: this.matchId, op_code: opCode, data: { userId: userId } } })
+      .then(() => {
+        // console.log("Successfully sent data message.")
+      }).catch(error => {
+        console.log("MatchDataSendRequest error occured: %o", error)
+      })
   }
 
   playerInMatch(match) {
