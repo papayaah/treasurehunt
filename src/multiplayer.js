@@ -20,6 +20,7 @@ export default class {
     this.players = players
     this.cursors = cursors
     this.worldLayer
+    this.removedTiles = []
   }
 
   initListeners(params) {
@@ -28,18 +29,15 @@ export default class {
     // console.log('initListeners', params, this.match.matchId, this.socket)
     if(params) this.match.matchId = params.match_id
     this.socket.onmatchdata = (result) => {
-      console.log('opcode', result)
       let data = result.data
       const player = this.players.getChildren().find(player => player.userId == result.data.userId)
       //console.log(player)
       switch (result.op_code) {
         case OP_CODES.MOVE_RIGHT:
           player.moveQueue.push({action: 'moveRight'})
-          //player.moveRight(this.cursors, true)
         break
         case OP_CODES.MOVE_LEFT:
           player.moveQueue.push({action: 'moveLeft'})
-          //player.moveLeft(this.cursors, true)
         break;
         case OP_CODES.STATE:
           data.players.forEach(player => {
@@ -74,7 +72,7 @@ export default class {
 
   sendState() {
     let data = { players: [], removedTiles: this.removedTiles }
-    console.log('sendState', this.removedTiles.length)
+    console.log('sendState removedTiles.length', this.removedTiles.length)
     this.players.children.each(player => {
       data.players.push({
         userId: player.userId,
@@ -86,6 +84,7 @@ export default class {
   }
 
   removeTile(x, y) {
+    this.removedTiles.push({x: x, y: y})
     this.match.send(OP_CODES.REMOVE_TILE, { x: x, y: y })
   }
 }

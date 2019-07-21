@@ -55,7 +55,6 @@ export default class extends Phaser.GameObjects.Sprite {
         targets: this,
         x: '+=16',
         duration: 200,
-        //paused: true,
         onStart(tween, targets) {
           const player = targets[0]
           player.movingRight = true
@@ -69,11 +68,9 @@ export default class extends Phaser.GameObjects.Sprite {
           const player = targets[0]
           player.movingRight = false
           if(!cursors) {
-            console.log(player)
             player.anims.play('m_idle', true)
           }
           else if(!cursors.left.isDown && !cursors.right.isDown) {
-            console.log(player)
             player.anims.play('m_idle', true)
           }
         }
@@ -100,11 +97,9 @@ export default class extends Phaser.GameObjects.Sprite {
           const player = targets[0]
           player.movingLeft = false
           if(!cursors) {
-            console.log(player)
             player.anims.play('m_idle', true)
           }
           else if(!cursors.left.isDown && !cursors.right.isDown)
-            console.log(player)
             player.anims.play('m_idle', true)
         }
       })

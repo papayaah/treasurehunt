@@ -120,7 +120,6 @@ export default class {
     }};
     this.socket.send(message)
     .then(res => {
-      console.log('joinedMatch', res)
       let match = res.match
       this.connectedOpponents = match.presences.filter(presence=>{
         // Remove your own user from list.
@@ -178,7 +177,6 @@ export default class {
   }
 
   send(opCode, data) {
-    console.log('match.js send', this.matchId, opCode, data)
     this.socket.send({ match_data_send: { match_id: this.matchId, op_code: opCode, data: data } })
       .then(() => {
         // console.log("Successfully sent data message.")

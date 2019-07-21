@@ -13,7 +13,7 @@ export default class extends Phaser.Scene {
     this.players
     this.messageLog
     this.player
-    this.removedTiles = []
+    this.connected = false
   }
 
   preload() {
@@ -34,6 +34,7 @@ export default class extends Phaser.Scene {
     this.messageLog = new MessageLog(this)
     game.emitter.on('connected', (session) => {
       this.messageLog.addMessage(`Connected ${session.username}`)
+      this.connected = true
       this.player.userId = session.user_id
       this.player.username = session.username
     })
@@ -79,7 +80,6 @@ export default class extends Phaser.Scene {
 
     this.worldLayer.setCollisionByProperty({ collides: true })
     this.multiplayer.worldLayer = this.worldLayer
-    this.multiplayer.removedTiles = this.removedTiles
     const debugGraphics = this.add.graphics().setAlpha(0.75)
     console.log(this.worldLayer.layer.data)
     // worldLayer.renderDebug(debugGraphics, {
@@ -97,7 +97,7 @@ export default class extends Phaser.Scene {
   }
 
   update() {
-    //this.players.children.each(player => player.update())
+    if(!this.connected) return
 
     if(this.player.moving())
       return
@@ -108,7 +108,6 @@ export default class extends Phaser.Scene {
     if (cursors.left.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x - 1, this.player.y)
       if(tile) {
-        this.removedTiles.push({x: tile.x, y: tile.y})
         this.multiplayer.removeTile(tile.x, tile.y)
         return worldLayer.removeTileAt(tile.x, tile.y)
       }
@@ -116,7 +115,6 @@ export default class extends Phaser.Scene {
     } else if (cursors.right.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x + 16, this.player.y)
       if(tile) {
-        this.removedTiles.push({x: tile.x, y: tile.y})
         this.multiplayer.removeTile(tile.x, tile.y)
         return worldLayer.removeTileAt(tile.x, tile.y)
       }
@@ -124,7 +122,6 @@ export default class extends Phaser.Scene {
     } else if(cursors.down.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x, this.player.y + 16)
       if(tile) {
-        this.removedTiles.push({x: tile.x, y: tile.y})
         this.multiplayer.removeTile(tile.x, tile.y)
         worldLayer.removeTileAt(tile.x, tile.y)
       }
