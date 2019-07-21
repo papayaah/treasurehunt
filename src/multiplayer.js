@@ -34,10 +34,12 @@ export default class {
       //console.log(player)
       switch (result.op_code) {
         case OP_CODES.MOVE_RIGHT:
-          player.moveRight(this.cursors)
+          player.moveQueue.push({action: 'moveRight'})
+          //player.moveRight(this.cursors, true)
         break
         case OP_CODES.MOVE_LEFT:
-          player.moveLeft(this.cursors)
+          player.moveQueue.push({action: 'moveLeft'})
+          //player.moveLeft(this.cursors, true)
         break;
         case OP_CODES.STATE:
           data.players.forEach(player => {

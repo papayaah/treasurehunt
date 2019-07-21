@@ -155,7 +155,6 @@ export default class {
   }
 
   createOrJoinMatch() {
-
     this.findExistingMatch(existingMatchId => {
           if(!existingMatchId) {
             this.createMatch(match => {

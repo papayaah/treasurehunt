@@ -25,6 +25,7 @@ export default class extends Phaser.Scene {
 
   create() {
     this.players = this.add.group()
+    this.players.active = true
     game.emitter = new Phaser.Events.EventEmitter()
 
     this.cursors = this.input.keyboard.createCursorKeys()
@@ -34,6 +35,7 @@ export default class extends Phaser.Scene {
     game.emitter.on('connected', (session) => {
       this.messageLog.addMessage(`Connected ${session.username}`)
       this.player.userId = session.user_id
+      this.player.username = session.username
     })
 
     game.emitter.on('createMatch', params => {
@@ -56,6 +58,7 @@ export default class extends Phaser.Scene {
         this.messageLog.addMessage(`${params.updatedPlayer.username} has joined`)
         let other = new Player(this, 240, 48, this.multiplayer)
         other.userId = params.updatedPlayer.user_id
+        other.username = params.updatedPlayer.username
         this.players.add(other)
 
         this.multiplayer.sendState()
@@ -63,7 +66,7 @@ export default class extends Phaser.Scene {
     })
     game.emitter.on('leaves', params => {
       this.messageLog.addMessage(`${params.updatedPlayer.username} has left`)
-      this.removePlayer(params.updatedPlayer)
+      this.removePlayer(params.updatedPlayer.user_id)
     })
 
     const map = this.make.tilemap({ key: "map" })
@@ -94,6 +97,8 @@ export default class extends Phaser.Scene {
   }
 
   update() {
+    //this.players.children.each(player => player.update())
+
     if(this.player.moving())
       return
 
@@ -126,10 +131,19 @@ export default class extends Phaser.Scene {
     }
   }
 
-  removePlayer(playerToRemove) {
+  removePlayer(userId) {
     this.players.children.each(player => {
-      if(player.userId == playerToRemove.user_id) {
-        this.players.remove(player, true, true)
+      const playersGroup = this.players
+      if(player.userId == userId) {
+        player.dying = true
+        this.tweens.add({
+          targets: player,
+          alpha: 0,
+          duration: 1000,
+          onComplete(tween, targets) {
+            playersGroup.remove(player, true, true)
+          }
+        })
       }
     })
   }

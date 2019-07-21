@@ -3,7 +3,7 @@ export default class extends Phaser.GameObjects.Sprite {
     super(scene, x, y, 'atlas', 'elf_m_hit_anim_f0.png')
       .setOrigin(0, 0.5)
 
-    scene.sys.add.existing(this)
+    scene.add.existing(this)
     //scene.physics.world.enable(this)
     scene.physics.add.existing(this)
     this.body.setCollideWorldBounds(true)
@@ -18,7 +18,23 @@ export default class extends Phaser.GameObjects.Sprite {
     this.movingLeft = false
     this.multiplayer = multiplayer
     this.userId = null
+    this.moveQueue = []
+    this.dying = false
+  }
 
+  preUpdate(time, delta) {
+    if(this.dying) return
+    super.preUpdate(time, delta)
+    if(this.moving()) return
+
+    if(this.moveQueue.length > 0) {
+      if(this.moveQueue[0].action == 'moveRight') {
+        this.moveRight()
+      } else if (this.moveQueue[0].action == 'moveLeft') {
+        this.moveLeft()
+      }
+      this.moveQueue.shift()
+    }
   }
 
   createAnimation(key, prefix, start, end) {
@@ -46,13 +62,20 @@ export default class extends Phaser.GameObjects.Sprite {
           player.flipX = false
           player.anims.play('m_run', true)
 
-          player.multiplayer.playerMoveRight(player.userId)
+          if(cursors)
+            player.multiplayer.playerMoveRight(player.userId)
         },
         onComplete(tween, targets) {
           const player = targets[0]
           player.movingRight = false
-          if(!cursors.left.isDown && !cursors.right.isDown)
+          if(!cursors) {
+            console.log(player)
             player.anims.play('m_idle', true)
+          }
+          else if(!cursors.left.isDown && !cursors.right.isDown) {
+            console.log(player)
+            player.anims.play('m_idle', true)
+          }
         }
       })
     }
@@ -70,12 +93,18 @@ export default class extends Phaser.GameObjects.Sprite {
           player.flipX = true
           player.anims.play('m_run', true)
 
-          player.multiplayer.playerMoveLeft(player.userId)
+          if(cursors)
+            player.multiplayer.playerMoveLeft(player.userId)
         },
         onComplete(tween, targets) {
           const player = targets[0]
           player.movingLeft = false
-          if(!cursors.left.isDown && !cursors.right.isDown)
+          if(!cursors) {
+            console.log(player)
+            player.anims.play('m_idle', true)
+          }
+          else if(!cursors.left.isDown && !cursors.right.isDown)
+            console.log(player)
             player.anims.play('m_idle', true)
         }
       })
