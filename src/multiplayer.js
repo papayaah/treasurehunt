@@ -7,7 +7,8 @@ const OP_CODES = {
   MOVE_LEFT: 1,
   MOVE_RIGHT: 2,
   PLAYERS: 3,
-  STATE: 4
+  STATE: 4,
+  REMOVE_TILE: 5
 }
 
 export default class {
@@ -18,6 +19,7 @@ export default class {
     this.session = new Session(this.client, 'treasurehunt')
     this.players = players
     this.cursors = cursors
+    this.worldLayer
   }
 
   initListeners(params) {
@@ -45,6 +47,14 @@ export default class {
               this.players.add(other)
             }
           })
+          this.removedTiles = data.removedTiles
+          data.removedTiles.forEach(tile => {
+            this.worldLayer.removeTileAt(tile.x, tile.y)
+          })
+          break;
+        case OP_CODES.REMOVE_TILE:
+          this.removedTiles.push({x: data.x, y: data.y})
+          this.worldLayer.removeTileAt(data.x, data.y)
           break;
         default: {
         }
@@ -61,7 +71,8 @@ export default class {
   }
 
   sendState() {
-    let data = { players: [] }
+    let data = { players: [], removedTiles: this.removedTiles }
+    console.log('sendState', this.removedTiles.length)
     this.players.children.each(player => {
       data.players.push({
         userId: player.userId,
@@ -70,5 +81,9 @@ export default class {
       })
     })
     this.match.send(OP_CODES.STATE, data)
+  }
+
+  removeTile(x, y) {
+    this.match.send(OP_CODES.REMOVE_TILE, { x: x, y: y })
   }
 }

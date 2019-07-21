@@ -13,6 +13,7 @@ export default class extends Phaser.Scene {
     this.players
     this.messageLog
     this.player
+    this.removedTiles = []
   }
 
   preload() {
@@ -74,7 +75,10 @@ export default class extends Phaser.Scene {
     this.worldLayer = map.createDynamicLayer("Blocks", tileset, 0, 0)
 
     this.worldLayer.setCollisionByProperty({ collides: true })
+    this.multiplayer.worldLayer = this.worldLayer
+    this.multiplayer.removedTiles = this.removedTiles
     const debugGraphics = this.add.graphics().setAlpha(0.75)
+    console.log(this.worldLayer.layer.data)
     // worldLayer.renderDebug(debugGraphics, {
     //   tileColor: null, // Color of non-colliding tiles
     //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
@@ -99,18 +103,24 @@ export default class extends Phaser.Scene {
     if (cursors.left.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x - 1, this.player.y)
       if(tile) {
+        this.removedTiles.push({x: tile.x, y: tile.y})
+        this.multiplayer.removeTile(tile.x, tile.y)
         return worldLayer.removeTileAt(tile.x, tile.y)
       }
       this.player.moveLeft(cursors)
     } else if (cursors.right.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x + 16, this.player.y)
       if(tile) {
+        this.removedTiles.push({x: tile.x, y: tile.y})
+        this.multiplayer.removeTile(tile.x, tile.y)
         return worldLayer.removeTileAt(tile.x, tile.y)
       }
       this.player.moveRight(cursors)
     } else if(cursors.down.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x, this.player.y + 16)
       if(tile) {
+        this.removedTiles.push({x: tile.x, y: tile.y})
+        this.multiplayer.removeTile(tile.x, tile.y)
         worldLayer.removeTileAt(tile.x, tile.y)
       }
     }
