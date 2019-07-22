@@ -21,6 +21,9 @@ export default class extends Phaser.Scene {
     this.load.multiatlas('atlas', 'src/assets/atlas.json', 'src/assets')
     this.load.tilemapTiledJSON("map", "src/assets/tilemap.json")
     this.load.bitmapFont('CelticTime12', 'src/assets/fonts/CelticTime12.png', 'src/assets/fonts/CelticTime12.xml')
+
+    let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexvirtualjoystickplugin.min.js'
+    this.load.plugin('rexvirtualjoystickplugin', url, true)
   }
 
   create() {
@@ -81,6 +84,40 @@ export default class extends Phaser.Scene {
     guiLevel.add(this.player, 'x', 0, 320).name('Player X').listen()
     guiLevel.add(this.player.body.velocity, 'y', 0, 240).name('Player Y').listen()
     this.physics.add.collider(this.players, this.worldLayer)
+
+    this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+      x: 50,
+      y: 190,
+      radius: 10,
+      base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 30),
+      thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0, 15),
+      dir: '4dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+      // forceMin: 16,
+      // enable: true
+  })
+  .on('update', this.dumpJoyStickState, this)
+
+  this.text = this.add.text(0, 100);
+  this.dumpJoyStickState()
+  this.joystickCursors = this.joyStick.createCursorKeys()
+  }
+
+  dumpJoyStickState() {
+    var cursorKeys = this.joyStick.createCursorKeys()
+    var s = 'Key down: '
+    for (var name in cursorKeys) {
+        if (cursorKeys[name].isDown) {
+            s += name + ' '
+        }
+    }
+    s += '\n';
+    s += ('Force: ' + Math.floor(this.joyStick.force * 100) / 100 + '\n')
+    s += ('Angle: ' + Math.floor(this.joyStick.angle * 100) / 100 + '\n')
+    this.text.setText(s)
+
+    if(cursorKeys.right.isDown) {
+      this.player.moveRight(cursorKeys)
+    }
   }
 
   update() {
@@ -92,14 +129,14 @@ export default class extends Phaser.Scene {
     const worldLayer = this.worldLayer
     const cursors = this.cursors
 
-    if (cursors.left.isDown) {
+    if (cursors.left.isDown || this.joystickCursors.left.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x - 1, this.player.y)
       if(tile) {
         this.multiplayer.removeTile(tile.x, tile.y)
         return worldLayer.removeTileAt(tile.x, tile.y)
       }
       this.player.moveLeft(cursors)
-    } else if (cursors.right.isDown) {
+    } else if (cursors.right.isDown || this.joystickCursors.right.isDown) {
       let tile = worldLayer.getTileAtWorldXY(this.player.x + 16, this.player.y)
       if(tile) {
         this.multiplayer.removeTile(tile.x, tile.y)
