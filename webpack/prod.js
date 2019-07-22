@@ -33,6 +33,4 @@ module.exports = merge(base, {
       }
     ])
   ]
-});
-
-console.log(module.exports)
+})

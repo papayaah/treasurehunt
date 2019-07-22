@@ -28,5 +28,4 @@ const config = {
   scene: MainScene
 }
 
-
 window.game = new Phaser.Game(config)

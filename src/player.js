@@ -4,7 +4,6 @@ export default class extends Phaser.GameObjects.Sprite {
       .setOrigin(0, 0.5)
 
     scene.add.existing(this)
-    //scene.physics.world.enable(this)
     scene.physics.add.existing(this)
     this.body.setCollideWorldBounds(true)
 

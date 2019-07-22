@@ -93,7 +93,6 @@ export default class {
       if(sortedMatches.length > 0) {
         foundMatchId = sortedMatches[0].id
       }
-      console.log('findExistingMatch', foundMatchId)
       callback(foundMatchId)
     }).catch(err => {
       console.log(err)
@@ -144,7 +143,6 @@ export default class {
   createMatch(callback) {
     this.socket.send({ match_create: {} })
     .then(result => {
-      console.log("Successfully created match.", result.match)
       this.matchId = result.match.match_id
       callback(result.match)
       this.writeMatch(this.matchId)

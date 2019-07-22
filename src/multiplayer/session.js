@@ -29,10 +29,8 @@ export default class {
             })
           } else {
             this.match.joinMatch(existingMatchId, match => {
-              console.log('session.js joinMatch', match)
               this.matchId = match.match_id
               if(existingMatchId == match.match_id) {
-                console.log('self.playerInMatch', self.playerInMatch(match))
                 if(self.playerInMatch(match)) {
                   game.emitter.emit('alreadyInMatch', match)
                 } else {

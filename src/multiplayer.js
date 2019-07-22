@@ -13,8 +13,6 @@ const OP_CODES = {
 
 export default class {
   constructor(players, cursors) {
-    // if(SINGLE_PLAYER) return
-
     //this.client = new nakama.Client('defaultkey', '127.0.0.1', 7350)
     this.client = new nakama.Client('defaultkey', 'nakama.programmingmind.net', 80)
     this.session = new Session(this.client, 'treasurehunt')
@@ -27,12 +25,10 @@ export default class {
   initListeners(params) {
     this.socket = this.session.socket
     this.match = this.session.match
-    // console.log('initListeners', params, this.match.matchId, this.socket)
     if(params) this.match.matchId = params.match_id
     this.socket.onmatchdata = (result) => {
       let data = result.data
       const player = this.players.getChildren().find(player => player.userId == result.data.userId)
-      //console.log(player)
       switch (result.op_code) {
         case OP_CODES.MOVE_RIGHT:
           player.moveQueue.push({action: 'moveRight'})
@@ -73,7 +69,6 @@ export default class {
 
   sendState() {
     let data = { players: [], removedTiles: this.removedTiles }
-    console.log('sendState removedTiles.length', this.removedTiles.length)
     this.players.children.each(player => {
       data.players.push({
         userId: player.userId,
