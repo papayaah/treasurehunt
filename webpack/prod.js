@@ -1,7 +1,8 @@
-const merge = require("webpack-merge");
-const path = require("path");
-const base = require("./base");
-const TerserPlugin = require("terser-webpack-plugin");
+const merge = require("webpack-merge")
+const path = require("path")
+const base = require("./base")
+const TerserPlugin = require("terser-webpack-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = merge(base, {
   mode: "production",
@@ -23,5 +24,15 @@ module.exports = merge(base, {
         }
       })
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/assets', '**', '*'),
+        to: path.resolve(__dirname, '../dist')
+      }
+    ])
+  ]
 });
+
+console.log(module.exports)
