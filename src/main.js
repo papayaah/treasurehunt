@@ -13,7 +13,7 @@ export default class extends Phaser.Scene {
     this.players
     this.messageLog
     this.player
-    this.connected = false
+    this.connected
   }
 
   preload() {
@@ -44,11 +44,6 @@ export default class extends Phaser.Scene {
       this.multiplayer.initListeners()
     })
     game.emitter.on('joinMatch', params => {
-      // params.presences.forEach(presence => {
-      //   let other = new Player(this, 240, 48, this.multiplayer)
-      //   other.userId = presence.user_id
-      //   this.players.add(other)
-      // })
       this.messageLog.addMessage(`Joined match: ${params.match_id}`)
       this.multiplayer.initListeners(params)
     })
@@ -80,20 +75,12 @@ export default class extends Phaser.Scene {
 
     this.worldLayer.setCollisionByProperty({ collides: true })
     this.multiplayer.worldLayer = this.worldLayer
-    const debugGraphics = this.add.graphics().setAlpha(0.75)
-    console.log(this.worldLayer.layer.data)
-    // worldLayer.renderDebug(debugGraphics, {
-    //   tileColor: null, // Color of non-colliding tiles
-    //   collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-    //   faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-    // })
 
     this.player = new Player(this, 240, 48, this.multiplayer)
     this.players.add(this.player)
     guiLevel.add(this.player, 'x', 0, 320).name('Player X').listen()
     guiLevel.add(this.player.body.velocity, 'y', 0, 240).name('Player Y').listen()
     this.physics.add.collider(this.players, this.worldLayer)
-    //this.physics.add.collider(this.players, worldLayer)
   }
 
   update() {

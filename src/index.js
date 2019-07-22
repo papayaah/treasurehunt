@@ -5,6 +5,7 @@ const dat = require('dat.gui')
 const gui = new dat.GUI()
 window.guiLevel = gui.addFolder('GameState')
 guiLevel.open()
+gui.hide()
 
 const config = {
   type: Phaser.AUTO,
@@ -19,7 +20,7 @@ const config = {
     default: 'arcade',
     arcade: {
         gravity: { y: 300 },
-        debug: true
+        debug: false
     }
   },
   pixelArt: true,
