@@ -15,7 +15,8 @@ export default class {
   constructor(players, cursors) {
     // if(SINGLE_PLAYER) return
 
-    this.client = new nakama.Client('defaultkey', '127.0.0.1', 7350)
+    //this.client = new nakama.Client('defaultkey', '127.0.0.1', 7350)
+    this.client = new nakama.Client('defaultkey', 'nakama.programmingmind.net', 80)
     this.session = new Session(this.client, 'treasurehunt')
     this.players = players
     this.cursors = cursors
